@@ -1,0 +1,45 @@
+#lang zh-CN ja-JP en-US
+
+Begin
+    BeginCategory
+        BeginMeta
+            cate_1 zh-CN ja-JP en-US
+        EndMeta
+        BeginBody
+            < a-1 {mp3} zh-CN ja-JP en-US >
+            < a-2 {mp3} zh-CN ja-JP en-US >
+        EndBody
+    EndCategory
+    BeginCategory
+        BeginMeta
+            cate_2 zh-CN ja-JP en-US
+        EndMeta
+        BeginBody
+            < a-3 {mp3} zh-CN ja-JP en-US >
+            < a-4 {mp3} zh-CN ja-JP en-US >
+            < a-5 {mp3} zh-CN ja-JP en-US >
+            < a-6 {mp3} zh-CN ja-JP en-US >
+        EndBody
+    EndCategory
+    BeginCategory
+        BeginMeta
+            cate_3 zh-CN ja-JP en-US
+        EndMeta
+        BeginBody
+            < a-7 {mp3} zh-CN ja-JP en-US >
+            < a-8 {mp3} zh-CN ja-JP en-US >
+            < a-9 {mp3} zh-CN ja-JP en-US >
+        EndBody
+    EndCategory
+    BeginCategory
+        BeginMeta
+            uncat zh-CN ja-JP en-US
+        EndMeta
+        BeginBody
+            < a-10 {mp3} zh-CN ja-JP en-US >
+            < config_test {json} zh-CN ja-JP en-US >
+            < config_test {nana} zh-CN ja-JP en-US >
+            < run {sh} zh-CN ja-JP en-US >
+        EndBody
+    EndCategory
+End
