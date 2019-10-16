@@ -1,6 +1,6 @@
 const ja_JP = {
     info: {
-        title: "あくあボタン",
+        title: "ななボタン",
         info: "通知",
         null: "空",
         audioStaff: "オーディオクリップ: mchong111 CatCoffee",

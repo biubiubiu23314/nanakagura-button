@@ -1,6 +1,6 @@
 const en_US = {
     info: {
-        title: "Aqua Button",
+        title: "Nana Button",
         info: "Information",
         null: "Empty",
         audioStaff: "Audio Clip: mchong111 CatCoffee",

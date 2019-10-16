@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 .cate-header{
-    background-color: rgba(255, 0, 128, 0.404);
+    background-color: rgba(255, 0, 0, 0.712);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     text-align: center;
@@ -34,8 +34,8 @@
 }
 .btn-new {
     color: #fff;
-    background-color: rgb(38, 176, 211);
-    border-color: rgb(211, 38, 211);
+    background-color: rgb(120, 140, 160);//按钮背景颜色
+    border-color: rgb(207, 135, 207);//按钮框颜色
 }
 </style>
 
@@ -50,6 +50,7 @@ class HomePage extends Vue {
     voices = VoiceList.voices
     play(path){
         this.stopPlay();
+        window.alert("还在开发中所以出来的是夸的声音哦！")
         let player = document.getElementById('player');
         player.src = "voices/" + path;
         player.play();

@@ -1,11 +1,11 @@
 const zh_CN = {
     info: {
-        title: "夸按钮",
+        title: "なな按钮",
         info: "信息",
         null: "空",
-        audioStaff: "音频剪辑: mchong111 CatCoffee",
+        audioStaff: "音频剪辑: QED",
         toGithub: "请在Github参与翻译、增补音频或提出建议",
-        notOfficial: "本站为爱好者作品，和hololive官方没有关联"
+        notOfficial: "本站为爱好者作品"
     },
     action: {
         toggleNavbar: "切换导航栏",
