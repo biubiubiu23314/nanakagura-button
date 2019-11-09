@@ -14,7 +14,7 @@ global.jQuery = global.$ = $;
 import 'bootstrap'
 import GlobalConst from './globalconst'
 
-import VoiceList from './voices.json'
+import VoiceList from './config_test.json'
 
 
 //提取标签到语言文件

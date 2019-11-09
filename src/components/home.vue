@@ -8,7 +8,7 @@
         <div v-for="category in voices" v-bind:key="category.categoryName">
             <div class="cate-header">{{ $t("voicecategory." + category.categoryName) }}</div>
             <div class="cate-body">
-                <button class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(voiceItem.path)">
+                <button class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(category.categoryName+ '/' + voiceItem.path)">
                     {{ $t("voice." + voiceItem.name )}}
                 </button>
             </div>
@@ -43,14 +43,13 @@
 <script>
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import VoiceList from '../voices.json'
+import VoiceList from '../config_test.json'
 
 @Component
 class HomePage extends Vue {
     voices = VoiceList.voices
     play(path){
         this.stopPlay();
-        window.alert("还在开发中所以出来的是夸的声音哦！")
         let player = document.getElementById('player');
         player.src = "voices/" + path;
         player.play();
