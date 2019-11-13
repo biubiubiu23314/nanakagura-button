@@ -234,8 +234,8 @@ def generate_template(folder, fp, lang):
         write_line(fp, 'BeginBody', level=2)
         print(f'Reading {subdir}...')
         cnt = 0
-        for subfiles in os.listdir(subdir):
-            if os.path.isfile(os.path.join(subdir, subfiles)) and '.' in subfiles:
+        for subfiles in os.listdir(os.path.join(folder, subdir)):
+            if os.path.isfile(os.path.join(folder, subdir, subfiles)) and '.' in subfiles:
                 cnt += 1
                 name, ftype = subfiles.split('.')
                 write_body(fp, name, ftype, lang)
