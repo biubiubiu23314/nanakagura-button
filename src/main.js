@@ -14,7 +14,7 @@ global.jQuery = global.$ = $;
 import 'bootstrap'
 import GlobalConst from './globalconst'
 
-import VoiceList from './config_test.json'
+import VoiceList from './nanakagura_voices.json'
 
 
 //提取标签到语言文件
@@ -52,6 +52,8 @@ for (let voiceCategoryList of VoiceList.voices){
 let emzh_CN = Object.assign(zh_CN, addZh_CN);
 let emen_US = Object.assign(en_US, adden_US);
 let emja_JP = Object.assign(ja_JP, addja_JP);
+
+global.parse = (x) => String(x)
 
 Vue.config.productionTip = false
 

@@ -6,7 +6,7 @@ import json
 '''
 Configuration (.nana) template generator.
 Command format:
-    python3 generate_voice_conf.py -template <folder> <output> [languages]+
+    python3 generate_voice_conf.py -template <folder> <output> [languages]+ -replace <language>
 Place audio files in the same category in the same directory.
 If an audio should be marked as uncategorized, then place it
 in the root folder.
@@ -122,13 +122,18 @@ class Parser:
     
     def emit(self, data):
         # print('Ending State', bin(self.state))
+        def map_desc(desc):
+            desc_map = {}
+            for i in range(len(desc)):
+                desc_map[self.locale[i]] = desc[i]
+            return desc_map
         if self.state & ACCEPT_END and self.rule[ACCEPT_END](data):
             self.state = DONE
         elif self.state & ACCEPT_END_META and self.rule[ACCEPT_END_META](data):
-            assert len(self.store) == self.locale_cnt + 1
+            assert len(self.store) <= self.locale_cnt + 1
             cat_name, *desc = self.store
             self.tempResult['categoryName'] = cat_name
-            self.tempResult['categoryDescription'] = dict(zip(self.locale, desc))
+            self.tempResult['categoryDescription'] = map_desc(desc)
             self.tempResult['voiceList'] = []
             self.store = []
             self.state = ACCEPT_BEGIN_BODY
@@ -139,12 +144,12 @@ class Parser:
             self.tempResult = {}
             self.state = ACCEPT_END | ACCEPT_BEGIN_CATE
         elif self.state & ACCEPT_RANGLE and self.rule[ACCEPT_RANGLE](data):
-            assert len(self.store) >= self.locale_cnt + 1
+            # assert len(self.store) >= self.locale_cnt + 1
             name, *desc = self.store
             self.tempResult['voiceList'].append({
                 'name' : name,
                 'path' : f'{name}.{self.current_ft}',
-                'description': dict(zip(self.locale, desc))
+                'description': map_desc(desc)
             })
             self.store = []
             self.current_ft = 'mp3'
@@ -175,7 +180,8 @@ class Parser:
             elif matched_state == ACCEPT_BEGIN_META:
                 self.state = ACCEPT_STR | ACCEPT_END_META
             elif matched_state == ACCEPT_STR:
-                self.store.append(data)
+                if data.lower() != 'null':
+                    self.store.append(data)
             elif matched_state == ACCEPT_BEGIN_BODY:
                 self.state = ACCEPT_LANGLE
             elif matched_state == ACCEPT_LANGLE:
@@ -198,6 +204,13 @@ class Parser:
         assert (not len(data))
         return self.result
 
+def get_replaced(translations, filename, replace=None):
+    if replace and replace in translations:
+        index = translations.index(replace)
+        return translations[:index] + [ filename ] + translations[index + 1:]
+    else:
+        return translations
+
 def parse_locale(fp):
     line = fp.readline().split(' ')
     assert len(line) != 0
@@ -212,15 +225,15 @@ def indent(level):
 def write_line(fp, msg, level=0):
     fp.write(indent(level) + msg + '\n')
 
-def write_meta(fp, meta_name, translations):
+def write_meta(fp, meta_name, translations, replace=None):
     write_line(fp, 'BeginMeta', level=2)
-    write_line(fp, f'{meta_name} {" ".join(translations)}', level=3)
+    write_line(fp, f'{meta_name} {" ".join(get_replaced(translations, meta_name, replace))}', level=3)
     write_line(fp, 'EndMeta', level=2)
 
-def write_body(fp, filename, ftype, translations):
-    write_line(fp, f'< {filename} {{{ftype}}} {" ".join(translations)} >', level=3)
+def write_body(fp, filename, ftype, translations, replace=None):
+    write_line(fp, f'< {filename} {{{ftype}}} {" ".join(get_replaced(translations, filename, replace=replace))} >', level=3)
 
-def generate_template(folder, fp, lang):
+def generate_template(folder, fp, lang, replace_lang=None):
     assert len(lang) > 0
     write_line(fp, f'#lang {" ".join(lang)}\n')
     write_line(fp, 'Begin')
@@ -230,7 +243,7 @@ def generate_template(folder, fp, lang):
     print(dirs)
     for subdir in dirs:
         write_line(fp, 'BeginCategory', level=1)
-        write_meta(fp, subdir, lang)
+        write_meta(fp, subdir, lang, replace=replace_lang)
         write_line(fp, 'BeginBody', level=2)
         print(f'Reading {subdir}...')
         cnt = 0
@@ -238,7 +251,7 @@ def generate_template(folder, fp, lang):
             if os.path.isfile(os.path.join(folder, subdir, subfiles)) and '.' in subfiles:
                 cnt += 1
                 name, ftype = subfiles.split('.')
-                write_body(fp, name, ftype, lang)
+                write_body(fp, name, ftype, lang, replace=replace_lang)
         print(f'{cnt} files loaded.')
         write_line(fp, 'EndBody', level=2)
         write_line(fp, 'EndCategory', level=1)
@@ -261,7 +274,12 @@ def main() :
         if len(argv) >= 3:
             with open(argv[2], 'w') as fp:
                 print(f'Reading folder {argv[1]}. Generating with languages: {" ".join(argv[3:])}')
-                generate_template(argv[1], fp, argv[3:])
+                if '-replace' in argv:
+                    lang = argv[3:argv.index('-replace')]
+                else:
+                    lang = argv[3:]
+                generate_template(argv[1], fp, lang,
+                                  replace_lang=argv[argv.index('-replace') + 1:][-1] if '-replace' in argv else None)
         else:
             raise Exception('Invalid Command')
     elif argv[0] == '-g':
