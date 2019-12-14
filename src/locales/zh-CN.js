@@ -3,7 +3,7 @@ const zh_CN = {
         title: "なな按钮",
         info: "信息",
         null: "空",
-        audioStaff: "音频剪辑: QED",
+        audioStaff: "音频剪辑: 辣辣七奈军",
         toGithub: "请在Github参与翻译、增补音频或提出建议",
         notOfficial: "本站为爱好者作品"
     },
