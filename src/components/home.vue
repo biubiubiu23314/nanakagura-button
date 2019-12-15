@@ -1,9 +1,11 @@
 <template>
     <div class="container-fluid" >
-        <div>
-            <div class="cate-header">{{ $t("action.control")}}</div>
-            <div class="cate-body"><button class="btn btn-info" @click="stopPlay">{{$t("action.stopvoice")}}</button></div>
-            <audio id="player"></audio>
+        <div class="sticky-container" sticky-container>
+            <div class="sticky" v-sticky="true" sticky-offset="{top : 40}" sticky-side="both">
+                <div class="cate-header">{{ $t("action.control")}}</div>
+                <div class="cate-body"><button class="btn btn-info" @click="stopPlay">{{$t("action.stopvoice")}}</button></div>
+                <audio id="player"></audio>
+            </div>
         </div>
         <div v-for="category in voices" v-bind:key="category.categoryName">
             <div v-if="needToShow(category.categoryDescription)" class="cate-header">{{ $t("voicecategory." + category.categoryName) }}</div>
@@ -11,7 +13,7 @@
                 <button v-if="needToShow(voiceItem.description) && !usePicture(voiceItem)" class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(category.categoryName+ '/' + voiceItem.path)">
                     {{ $t("voice." + voiceItem.name )}}
                 </button>
-                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" width="30%" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(category.categoryName+ '/' + voiceItem.path)"/>
+                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(category.categoryName+ '/' + voiceItem.path)"/>
             </div>
         </div>
     </div>
@@ -40,10 +42,11 @@
 }
 
 img{
-  transition: .2s;
+    width: 20%;
+    transition: .2s;
 }
 img:hover{
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 </style>
 

@@ -157,7 +157,8 @@
             "name": "DD斬首４",
             "path": "DD斬首４.wav",
             "description": {
-              "zh-CN": "DD斬首４"
+              "zh-CN": "DD斩首4",
+              "ja-JP": "DD斬首4"
             }
           },
           {
@@ -171,8 +172,8 @@
             "name": "kimo_kimo_kimo",
             "path": "kimo_kimo_kimo.wav",
             "description": {
-              "zh-CN": "kimo_kimo_kimo",
-              "ja-JP": "kimo_kimo_kimo"
+              "zh-CN": "kimo kimo kimo",
+              "ja-JP": "kimo kimo kimo"
             }
           },
           {
@@ -713,7 +714,7 @@
             "name": "呼吸",
             "path": "呼吸.wav",
             "description": {
-              "zh-CN": "战术吸气",
+              "zh-CN": "高速呼吸スーハースーハー",
               "ja-JP": "呼吸"
             }
           },
@@ -729,7 +730,7 @@
             "name": "咳",
             "path": "咳.wav",
             "description": {
-              "zh-CN": "zh-CN",
+              "zh-CN": "咳嗽",
               "ja-JP": "咳"
             }
           },
@@ -737,7 +738,8 @@
             "name": "息を吸う",
             "path": "息を吸う.wav",
             "description": {
-              "zh-CN": "息を吸う"
+              "zh-CN": "战术吸气",
+              "ja-JP": "息を吸う"
             }
           },
           {
@@ -821,22 +823,6 @@
             }
           },
           {
-            "name": "笑声10",
-            "path": "笑声10.wav",
-            "description": {
-              "zh-CN": "笑声10",
-              "ja-JP": "笑声10"
-            }
-          },
-          {
-            "name": "笑声11",
-            "path": "笑声11.wav",
-            "description": {
-              "zh-CN": "笑声11",
-              "ja-JP": "笑声11"
-            }
-          },
-          {
             "name": "笑声2",
             "path": "笑声2.wav",
             "description": {
@@ -898,6 +884,22 @@
             "description": {
               "zh-CN": "笑声9",
               "ja-JP": "笑声9"
+            }
+          },
+          {
+            "name": "笑声10",
+            "path": "笑声10.wav",
+            "description": {
+              "zh-CN": "笑声10",
+              "ja-JP": "笑声10"
+            }
+          },
+          {
+            "name": "笑声11",
+            "path": "笑声11.wav",
+            "description": {
+              "zh-CN": "笑声11",
+              "ja-JP": "笑声11"
             }
           },
           {
@@ -1104,15 +1106,8 @@
             "name": "映ってないよ",
             "path": "映ってないよ.wav",
             "description": {
-              "zh-CN": "但是没有露出来哦",
+              "zh-CN": "不能露的地方没有露哦",
               "ja-JP": "映ってないよ"
-            }
-          },
-          {
-            "name": "不能露的地方没有露哦",
-            "path": "不能露的地方没有露哦.wav",
-            "description": {
-              "zh-CN": "不能露的地方没有露哦"
             }
           },
           {
