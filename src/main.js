@@ -15,6 +15,7 @@ import 'bootstrap'
 import GlobalConst from './globalconst'
 
 import VoiceList from './nanakagura_voices.json'
+import Sticky from 'vue-sticky-directive'
 
 
 //提取标签到语言文件
@@ -57,8 +58,9 @@ global.parse = (x) => String(x)
 
 Vue.config.productionTip = false
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 Vue.use(GlobalConst);
+Vue.use(Sticky);
 
 const messages = {
   'en-US': emen_US,
