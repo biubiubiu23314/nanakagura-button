@@ -17,6 +17,7 @@
                     v-bind:key="voiceItem.name" 
                     class="meme-image"
                     :image-url="getPicture(voiceItem)" 
+                    :image-ratio="4/3"
                     :width-on-screen="8"
                     :width-on-screen-tablet="10"
                     :width-on-screen-smartphone="15"
