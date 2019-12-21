@@ -42,7 +42,7 @@
 }
 
 img{
-    width: 20%;
+    width: 10%;
     transition: .2s;
 }
 img:hover{
@@ -70,17 +70,17 @@ class HomePage extends Vue {
         player.pause();
     }
     needToShow(x) {
-        let locale = this.$i18n.locale
-        return x[locale] !== undefined
+        let locale = this.$i18n.locale;
+        return x[locale] !== undefined;
     }
     usePicture(x) {
-        if (x === undefined) return false
-        let locale = this.$i18n.locale
-        return x.usePicture !== undefined && x.usePicture[locale] !== undefined
+        if (x === undefined) return false;
+        let locale = this.$i18n.locale;
+        return x.usePicture !== undefined && x.usePicture[locale] !== undefined;
     }
     getPicture(x) {
-        let locale = this.$i18n.locale
-        return `pictures/${locale}/${x.usePicture[locale]}`
+        let locale = this.$i18n.locale;
+        return `pictures/${locale}/${x.usePicture[locale]}`;
     }
 }
 export default HomePage;
