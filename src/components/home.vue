@@ -1,19 +1,28 @@
 <template>
-    <div class="container-fluid" >
-        <div class="sticky-container" sticky-container>
-            <div class="sticky" v-sticky="true" sticky-offset="{top : 40}" sticky-side="both">
+    <div class="container-fluid">
+            <div>
                 <div class="cate-header">{{ $t("action.control")}}</div>
                 <div class="cate-body"><button class="btn btn-info" @click="stopPlay">{{$t("action.stopvoice")}}</button></div>
                 <audio id="player"></audio>
             </div>
-        </div>
         <div v-for="category in voices" v-bind:key="category.categoryName">
             <div v-if="needToShow(category.categoryDescription)" class="cate-header">{{ $t("voicecategory." + category.categoryName) }}</div>
             <div class="cate-body">
                 <button v-if="needToShow(voiceItem.description) && !usePicture(voiceItem)" class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(category.categoryName+ '/' + voiceItem.path)">
                     {{ $t("voice." + voiceItem.name )}}
                 </button>
-                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(category.categoryName+ '/' + voiceItem.path)"/>
+                <vue-responsive-image 
+                    v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" 
+                    v-for="voiceItem in category.voiceList" 
+                    v-bind:key="voiceItem.name" 
+                    class="meme-image"
+                    :image-url="getPicture(voiceItem)" 
+                    :width-on-screen="8"
+                    :width-on-screen-tablet="10"
+                    :width-on-screen-smartphone="15"
+                    @click.native="play(category.categoryName+ '/' + voiceItem.path)"
+                    >
+                </vue-responsive-image>
             </div>
         </div>
     </div>
@@ -41,13 +50,14 @@
     border-color: rgb(207, 135, 207);//按钮框颜色
 }
 
-img{
-    width: 10%;
-    transition: .2s;
+.meme-image img {
+    transition: .2s
 }
-img:hover{
-    transform: scale(1.1);
+
+.meme-image:hover img {
+    transform: scale(2.0)
 }
+
 </style>
 
 
@@ -55,10 +65,14 @@ img:hover{
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import VoiceList from '../nanakagura_voices.json'
+import VueResponsiveImage from 'vue-responsive-image'
+
+Vue.component('vue-responsive-image', VueResponsiveImage);
 
 @Component
 class HomePage extends Vue {
     voices = VoiceList.voices
+    scaled = false
     play(path){
         this.stopPlay();
         let player = document.getElementById('player');
