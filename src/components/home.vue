@@ -22,10 +22,10 @@
         <div v-for="category in voices" v-bind:key="category.categoryName">
             <div v-if="needToShow(category.categoryDescription)" class="cate-header">{{ $t("voicecategory." + category.categoryName) }}</div>
             <div class="cate-body">
-                <button v-if="needToShow(voiceItem.description) && !usePicture(voiceItem)" class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(category.categoryName+ '/' + voiceItem.path)">
+                <button v-if="needToShow(voiceItem.description) && !usePicture(voiceItem)" class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(voiceItem, category.categoryName)">
                     {{ $t("voice." + voiceItem.name )}}
                 </button>
-                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(category.categoryName+ '/' + voiceItem.path)"/>
+                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(voiceItem)"/>
             </div>
         </div>
     </div>
@@ -84,9 +84,9 @@ class HomePage extends Vue {
     voice = {};
     playingAudio = new Map()
 
-    play(item){
+    play(item, category){
         if (this.overlapCheck) {
-            let audio = new Audio("voices/" + item.path);
+            let audio = new Audio("voices/" + category + "/" + item.path);
             this.voice = item;
             this.playingAudio.set(item.path, audio);
             audio.onended = () => {
@@ -96,7 +96,7 @@ class HomePage extends Vue {
         } else {
             this.stopPlay();
             let player = document.getElementById('player');
-            player.src = "voices/" + item.path;
+            player.src = "voices/" + category + "/" + item.path;
             this.voice = item;
             player.play();
         }
@@ -119,7 +119,7 @@ class HomePage extends Vue {
     }
     random() {
         let tempList = this.voices[this._randomNum(0, this.voices.length - 1)];
-        this.play(tempList.voiceList[this._randomNum(0, tempList.voiceList.length - 1)]);
+        this.play(tempList.voiceList[this._randomNum(0, tempList.voiceList.length - 1)], tempList.categoryName);
     }
     autoPlay(){
         if (this.overlapCheck) {
