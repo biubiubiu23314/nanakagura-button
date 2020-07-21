@@ -48,6 +48,7 @@ img{
 img:hover{
     transform: scale(1.1);
 }
+
 </style>
 
 
@@ -55,10 +56,14 @@ img:hover{
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import VoiceList from '../nanakagura_voices.json'
+import VueResponsiveImage from 'vue-responsive-image'
+
+Vue.component('vue-responsive-image', VueResponsiveImage);
 
 @Component
 class HomePage extends Vue {
     voices = VoiceList.voices
+    scaled = false
     play(path){
         this.stopPlay();
         let player = document.getElementById('player');
@@ -70,17 +75,17 @@ class HomePage extends Vue {
         player.pause();
     }
     needToShow(x) {
-        let locale = this.$i18n.locale
-        return x[locale] !== undefined
+        let locale = this.$i18n.locale;
+        return x[locale] !== undefined;
     }
     usePicture(x) {
-        if (x === undefined) return false
-        let locale = this.$i18n.locale
-        return x.usePicture !== undefined && x.usePicture[locale] !== undefined
+        if (x === undefined) return false;
+        let locale = this.$i18n.locale;
+        return x.usePicture !== undefined && x.usePicture[locale] !== undefined;
     }
     getPicture(x) {
-        let locale = this.$i18n.locale
-        return `pictures/${locale}/${x.usePicture[locale]}`
+        let locale = this.$i18n.locale;
+        return `pictures/${locale}/${x.usePicture[locale]}`;
     }
 }
 export default HomePage;
