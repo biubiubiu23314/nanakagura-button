@@ -25,7 +25,7 @@
                 <button v-if="needToShow(voiceItem.description) && !usePicture(voiceItem)" class="btn btn-new" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" @click="play(voiceItem, category.categoryName)">
                     {{ $t("voice." + voiceItem.name )}}
                 </button>
-                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(voiceItem)"/>
+                <img v-if="needToShow(voiceItem.description) && usePicture(voiceItem)" v-for="voiceItem in category.voiceList" v-bind:key="voiceItem.name" v-bind:src="getPicture(voiceItem)" @click="play(voiceItem, category.categoryName))"/>
             </div>
         </div>
     </div>
